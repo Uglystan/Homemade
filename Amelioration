@@ -1,0 +1,5 @@
+API qui permet aux utilisateur de CRUD leurs propre task, event
+API pour mettre a jour les donne du modele user
+Authorisation correcte pour les api
+Pop up ou modal pour confirmer suppression d'element
+Creer un evenement anniversaire a la creation d'un user (signal post_save)

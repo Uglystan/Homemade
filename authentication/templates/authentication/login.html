@@ -1,0 +1,12 @@
+{% extends 'Homemade/base.html' %}
+{% block content %}
+
+	<h2>Login</h2>
+		<form action="" method="post">
+			{% csrf_token %}
+			{{ login_form.as_p }}
+			<input type="submit" value="Se connecter">
+		</form>
+		<a href="{% url 'register' %}">Signin</a>
+
+{% endblock content %}

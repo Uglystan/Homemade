@@ -1,0 +1,9 @@
+{% extends 'Homemade/base.html' %}
+
+{% block content %}
+<h1>Welcome to Homemade</h1>
+<h3>Task in court</h3>
+{% for task in tasks %}
+	<p><a href="{% url 'task-detail' task.id %}">{{ task.title }}</a></p>
+{% endfor %}
+{% endblock content %}
