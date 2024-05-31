@@ -1,0 +1,44 @@
+{% extends 'Homemade/base.html' %}
+{% block content %}
+
+<h2>My tasks authored ongoing</h2>
+{% if tasks_authored %}
+	{% for task_authored in tasks_authored %}
+		{% if not task_authored.finish %}
+			<h4><a href="{% url 'task-detail' task_authored.id %}">{{ task_authored.title }}</a></h4>
+			<p>Target : {{ task_authored.target.username }}</p>
+		{% endif %}
+	{% endfor %}
+{% else %}
+	<h4>Empty</h4>
+{% endif %}
+<h2>My tasks received ongoing</h2>
+{% if tasks_received%}
+	{% for task_received in tasks_received %}
+		{% if not task_received.finish %}
+			<h4><a href="{% url 'task-detail' task_received.id %}">{{ task_received.title }}</a></h4>
+			<p>Author : {{ task_received.author.username }}</p>
+		{% endif %}
+	{% endfor %}
+{% else %}
+	<h4>Empty</h4>
+{% endif %}
+<h2>My tasks done</h2>
+{% if tasks_received or tasks_authored %}
+	{% for task_received in tasks_received %}
+		{% if task_received.finish %}
+			<h4><a href="{% url 'task-detail' task_received.id %}">{{ task_received.title }}</a></h4>
+			<p>Target : {{ task_received.target.username }}</p>
+		{% endif %}
+	{% endfor %}
+	{% for task_authored in tasks_authored %}
+		{% if task_authored.finish %}
+			<h4><a href="{% url 'task-detail' task_authored.id %}">{{ task_authored.title }}</a></h4>
+			<p>Target : {{ task_authored.target.username }}</p>
+		{% endif %}
+	{% endfor %}
+{% else %}
+	<h4>Empty</h4>
+{% endif %}
+<a href="{% url 'task-create' %}">Create a new task</a>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends 'Homemade/base.html' %}
+{% block content %}
+<h2>{{ task.title }}</h2>
+<p>Description : {{ task.description }}</p>
+<p>Author : {{ task.author }}</p>
+<p>Date created : {{ task.date_created }}</p>
+<p>Date updated : {{ task.date_updated }}</p>
+<p>Done : {{ task.finish }}</p>
+{% if not task.finish %}
+	<a href="{% url 'task-done' task.id %}">Task Done</a>
+{% endif %}
+{% if task.author == request.user %}
+	<a href="{% url 'task-edit' task.id %}">Edit task</a>
+	<form action="{% url 'task-delete' task.id %}" method="post">
+		{% csrf_token %}
+		<input type="submit" value="Delete Task">
+	</form>
+{% endif %}
+{% endblock content %}
