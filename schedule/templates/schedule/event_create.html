@@ -1,0 +1,9 @@
+{% extends 'Homemade/base.html' %}
+{% block content %}
+<h3>Create Event</h3>
+<form action="" method="post">
+	{% csrf_token %}
+	{{ event_form.as_p }}
+	<input type="submit" value="Create Event">
+</form>
+{% endblock content %}

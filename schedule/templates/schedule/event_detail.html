@@ -1,0 +1,43 @@
+{% extends 'Homemade/base.html' %}
+
+{% block content %}
+<h3>{{ event.title }}</h3>
+{% if event.description %}
+<p>{{ event.description }}</p>
+{% endif %}
+<p>{{ event.date_event }}</p>
+<p>Invited : 
+	{% for user in users_invited %}
+		{{ user }} 
+	{% endfor %}
+</p>
+<p>
+	Participates : 
+	{% for participate in participates %}
+		{% if participate.participation == True %}
+			{{ participate.user }}
+		{% endif %}
+	{% endfor %}
+</p>
+<p>Author : {{ event.author }}</p>
+{% if event_participation %}
+	<p>
+		Invitation : {{ event_participation.participation }} 
+		<a 
+			href="{% url 'event-participate' event.id %}">
+			{% if event_participation.participation == False %}
+				Participate
+			{% else %}
+				Not participate
+			{% endif %}
+		</a>
+	</p>
+{% endif %}
+{% if event.author == request.user %}
+	<a href="{% url 'event-edit' event.id %}">Edit Event</a>
+	<form action="{% url 'event-delete' event.id %}" method="post">
+		{% csrf_token %}
+		<input type="submit" value="Delete Event">
+	</form>
+{% endif %}
+{% endblock content %}

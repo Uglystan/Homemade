@@ -1,0 +1,20 @@
+{% extends 'Homemade/base.html' %}
+{% block content %}
+
+<h2>Event</h2>
+{% if events %}
+
+	{% for event in events %}
+		<h4><a href="{% url 'event-detail' event.id %}">{{ event.title }}</a></h4>
+		<p>{{ event.date_event }}</p>
+		<p>Participant :
+			{% for user in  event.participant.all %}
+				{{ user }}
+			{% endfor %}
+		</p>
+	{% endfor %}
+{% else %}
+	<p>No event</p>
+{% endif %}
+<a href="{% url 'event-create' %}">Create an event</a>
+{% endblock content %}
