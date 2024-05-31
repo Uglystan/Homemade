@@ -1,0 +1,7 @@
+{% extends 'Homemade/base.html' %}
+{% block content %}
+<h2>Game rank</h2>
+{% for game in games %}
+	<p>{{ game.player }} {{ game.score }}</p>
+{% endfor %}
+{% endblock content %}
